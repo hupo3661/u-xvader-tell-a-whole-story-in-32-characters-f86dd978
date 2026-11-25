@@ -22,6 +22,10 @@ def validate(name: str) -> None:
     """Fail loudly unless the name satisfies the competition gate."""
     assert isinstance(name, str)
     assert name.strip(), "entry must not be only white space"
+    assert name == name.strip(), (
+        "entry must not start or end with white space: "
+        "padding would waste characters the gate counts"
+    )
     assert "\n" not in name and "\r" not in name, "entry must be one line"
     assert 1 <= len(name) <= MAX_CHARS, (
         f"entry must be 1-{MAX_CHARS} characters, got {len(name)}"
